@@ -3,14 +3,10 @@ module.exports = {
   runtimeCompiler: true,
   devServer: {
     writeToDisk: true,
-    // proxy: {
-    //   "/api": {
-    //     target: "https://www.apps.livetutor.com.bd",
-    //     ws: true,
-    //     changeOrigin: true,
-    //   },
-    // },
   },
+  outputDir: process.env.NODE_ENV === 'production'
+    ? '/var/www/livetutor_frontend/'
+    : 'dist',
   assetsDir: "static",
   configureWebpack: {
     //Necessary to run npm link https://webpack.js.org/configuration/resolve/#resolve-symlinks

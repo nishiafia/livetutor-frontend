@@ -7,7 +7,7 @@ const access_token = localStorage.getItem("access");
 
 const base_url =
   process.env.NODE_ENV === "production"
-    ? "https://api.meetingme.live/api/"
+    ?  process.env.VUE_APP_BACKEND_BASEURL
     : "http://localhost:8000/api/";
 let config = {
   baseURL: base_url,

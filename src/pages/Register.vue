@@ -102,11 +102,14 @@ export default {
           password: this.password,
           email: this.email,
         };
+        const register_url =   process.env.NODE_ENV === "production"
+              ? process.env.VUE_APP_BACKEND_BASEURL+'users/' //TODO: search possibility
+              : "http://localhost:8000/api/users/"
+
+        console.log(register_url)
         return axios
           .post(
-            process.env.NODE_ENV === "production"
-              ? "https://www.api.meetingme.live/api/users/" //TODO: search possibility
-              : "http://localhost:8000/api/users/",
+            register_url,
             data,
             {
               headers: {
