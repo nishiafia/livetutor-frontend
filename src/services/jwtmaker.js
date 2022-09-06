@@ -11,7 +11,7 @@ export default function (payload_params) {
     aud: "3C68F1C9B375C34C2FB4D3CF86205254",
     iss: "3C68F1C9B375C34C2FB4D3CF86205254",
     iat: Math.floor(timestamp / 1000),
-    nbf: Math.floor(timestamp / 1000),
+    nbf: 2000,
     exp: Math.floor((timestamp + 1000 * 60 * 60 * 3) / 1000),
   };
   const _header = Buffer.from(JSON.stringify(header))
