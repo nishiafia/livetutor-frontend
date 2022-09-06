@@ -103,7 +103,7 @@ export default {
           email: this.email,
         };
         const register_url =
-          process.env.NODE_ENV !== "production"
+          process.env.NODE_ENV === "production"
             ? process.env.VUE_APP_BACKEND_BASEURL + "users/" //TODO: search possibility
             : "http://localhost:8000/api/users/";
 
