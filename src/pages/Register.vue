@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height>
     <v-row align="center" justify="center">
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="8" lg="6">
         <v-card class="mx-4 pa-4">
           <v-form
             @submit.prevent="check_mobile()"
@@ -102,21 +102,18 @@ export default {
           password: this.password,
           email: this.email,
         };
-        const register_url =   process.env.NODE_ENV === "production"
-              ? process.env.VUE_APP_BACKEND_BASEURL+'users/' //TODO: search possibility
-              : "http://localhost:8000/api/users/"
+        const register_url =
+          process.env.NODE_ENV === "production"
+            ? process.env.VUE_APP_BACKEND_BASEURL + "users/" //TODO: search possibility
+            : "http://localhost:8000/api/users/";
 
-        console.log(register_url)
+        console.log(register_url);
         return axios
-          .post(
-            register_url,
-            data,
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
+          .post(register_url, data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
           .then(() =>
             this.$store.dispatch("user/login", {
               phone: this.mobile,
