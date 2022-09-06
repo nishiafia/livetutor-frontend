@@ -25,7 +25,10 @@ let router = new Router({
 });
 router.beforeEach((to, from, next) => {
   store.dispatch("user/validate").then(() => {
-    if (!["Login", "Register"].includes(to.name) && !store.getters["user/userIsAuthenticated"])
+    if (
+      !["Login", "Register", "Logout"].includes(to.name) &&
+      !store.getters["user/userIsAuthenticated"]
+    )
       next({ name: "Login", query: { redirect: to.fullPath } });
     else next();
   });
@@ -50,7 +53,9 @@ function configRoutes() {
           path: "/add-organization-users",
           name: "AddOrganizationUsers",
           component: () =>
-            import("@/components/organization/create/UploadOrganizationUsersRooms.vue"),
+            import(
+              "@/components/organization/create/UploadOrganizationUsersRooms.vue"
+            ),
         },
       ],
     },
