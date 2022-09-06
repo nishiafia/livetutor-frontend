@@ -1,13 +1,9 @@
 import Axios from "axios";
-import Vue from "vue";
-
-const access_token = localStorage.getItem("access");
-
 // const base_url = "https://apps.livetutor.com.bd/api/";
 
 const base_url =
-  process.env.NODE_ENV === "production"
-    ?  process.env.VUE_APP_BACKEND_BASEURL
+  process.env.NODE_ENV !== "production"
+    ? process.env.VUE_APP_BACKEND_BASEURL
     : "http://localhost:8000/api/";
 let config = {
   baseURL: base_url,

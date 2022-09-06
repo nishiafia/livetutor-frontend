@@ -20,10 +20,21 @@ export default {
     },
 
     add({ dispatch }, { meetings }) {
-      console.log(meetings);
-      return api.post("/meetings/", meetings).then(() => dispatch("get"));
+      return new Promise((resolve, reject) => {
+        api
+          .post("/meetings/", meetings)
+          .then((response) => {
+            dispatch("get").then(() => {
+              resolve(response);
+            });
+          })
+          .catch((error) => reject(error));
+      });
     },
-    update({ dispatch }, { id, name, description, meeting_date, start_time, end_time }) {
+    update(
+      { dispatch },
+      { id, name, description, meeting_date, start_time, end_time }
+    ) {
       return api
         .put("/meetings/", {
           id,
@@ -48,10 +59,13 @@ export default {
     todays_upcoming_meetings: (state) =>
       state.meetings.filter(
         (meeting) =>
-          new Date().getDate() === new Date(meeting.start_date_time).getDate() &&
+          new Date().getDate() ===
+            new Date(meeting.start_date_time).getDate() &&
           new Date(meeting.start_date_time).getTime() >= new Date().getTime()
       ),
     meetings_for_current_class: (state) => (class_id, trial) =>
-      state.meetings.filter((meeting) => meeting.room === class_id && meeting.trial == trial),
+      state.meetings.filter(
+        (meeting) => meeting.room === class_id && meeting.trial == trial
+      ),
   },
 };
