@@ -2,16 +2,13 @@
   <div>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
-        <v-btn href="/">
-          <v-img
-            alt="Vuetify Logo"
-            class="shrink mr-2"
-            contain
-            src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-            transition="scale-transition"
-            width="40"
-          />
-        </v-btn>
+        <v-img
+          alt="meeting me Logo"
+          src="@/assets/logo-meetingme.png"
+          transition="scale-transition"
+          height="150px"
+          contain
+        />
 
         <!-- <v-img
           alt="Vuetify Name"
@@ -78,7 +75,7 @@ export default {
   data() {
     return {
       sidebar: false,
-      appTitle: "LiveTutor",
+      appTitle: "Meeting Me",
       logged_user_nav: [
         { title: this.username, path: "/profile" },
         { title: "Logout", path: "/logout" },

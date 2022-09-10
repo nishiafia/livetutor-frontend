@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height>
-    <v-row justify="center" align="center">Welcome to Livetutor</v-row>
+    <v-row justify="center" align="center">Welcome to Meeting Me</v-row>
   </v-container>
 </template>
 

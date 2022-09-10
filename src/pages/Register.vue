@@ -59,11 +59,9 @@
 
 <script>
 import axios from "axios";
-import Individual from "../components/register/Individual.vue";
-import Institution from "../components/register/Institution.vue";
 import PhoneField from "../components/global/PhoneField.vue";
 export default {
-  components: { Individual, Institution, PhoneField },
+  components: { PhoneField },
   name: "Register",
   data() {
     return {

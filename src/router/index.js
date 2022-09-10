@@ -38,11 +38,17 @@ export default router;
 
 function configRoutes() {
   return [
+    // {
+    //   path: "/meeting",
+    //   name: "meeting",
+    //   props: true,
+    //   component: () => import("@/components/global/JitsiMeet"),
+    // },
     {
-      path: "/meeting",
+      path: "/meeting/:roomName",
       name: "meeting",
       props: true,
-      component: () => import("@/components/global/JitsiMeet"),
+      component: () => import("@/pages/Meeting"),
     },
     {
       path: "/manage-organization",

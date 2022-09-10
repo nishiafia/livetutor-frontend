@@ -14,6 +14,7 @@ export default {
             ...meeting,
             starts_at: new Date(meeting.start_date_time),
             ends_at: new Date(meeting.end_date_time),
+            timed: true,
           }))
         )
       );

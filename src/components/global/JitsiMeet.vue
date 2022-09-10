@@ -1,7 +1,5 @@
 <template>
-  <v-container fill-height fluid>
-    <div ref="jitsiContainer" style="height: 100%; width: 100%"></div>
-  </v-container>
+  <div ref="jitsiContainer" style="height: 100%; width: 100%"></div>
 </template>
 
 <script>

@@ -46,7 +46,7 @@
         >
           <v-card-title>Sign up</v-card-title>
           <p>
-            Live Tutor, provides a seamless experience to the student, teacher
+            Meeting Me, provides a seamless experience to the student, teacher
             and organization about tutoring.
           </p>
           <v-btn color="primary lighten-5" outlined @click="goRegister()">

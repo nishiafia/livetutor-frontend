@@ -4,11 +4,11 @@
     <v-main class="zindex">
       <router-view />
     </v-main>
-    <div class="watermark">Livetutor</div>
+    <div class="watermark">Meeting Me</div>
     <v-footer color="#B1D0E0" padless>
       <v-row justify="center" no-gutters>
         <v-col class="py-4 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Livetutor</strong>
+          {{ new Date().getFullYear() }} — <strong>Meeting Me</strong>
         </v-col>
       </v-row>
     </v-footer>

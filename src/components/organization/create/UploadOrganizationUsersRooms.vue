@@ -15,7 +15,12 @@
       @change="loadCSV"
     >
       <template #append-outer>
-        <v-btn icon>
+        <v-btn
+          icon
+          tag="a"
+          href="/files/meetingme_org_user_template.csv"
+          download
+        >
           <v-icon color="secondary"> mdi-download </v-icon>
         </v-btn>
       </template>
