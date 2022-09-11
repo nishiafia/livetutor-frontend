@@ -9,6 +9,13 @@ export default {
       type: String,
       default: "openLounge",
     },
+    userInfo: {
+      type: Object,
+      default: () => ({
+        displayName: "Anonymous",
+        email: "",
+      }),
+    },
     jwt: {
       type: String,
       default: "",
@@ -20,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.jwt);
+    console.log(this.userInfo);
     this.loadJitsiScript().then(() => {
       this.loading = true;
       this.initJitsi();
@@ -46,8 +53,9 @@ export default {
     },
     initJitsi() {
       const options = {
+        // ...(this.jwt && { jwt: this.jwt }),
         roomName: this.roomName,
-        jwt: this.jwt,
+        userInfo: this.userInfo,
         parentNode: this.$refs.jitsiContainer,
         startWithAudioMuted: true,
         startWithVideoMuted: true,

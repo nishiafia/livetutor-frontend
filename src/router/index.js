@@ -26,7 +26,7 @@ let router = new Router({
 router.beforeEach((to, from, next) => {
   store.dispatch("user/validate").then(() => {
     if (
-      !["Login", "Register", "Logout"].includes(to.name) &&
+      !["Login", "Register", "Logout", "meeting"].includes(to.name) &&
       !store.getters["user/userIsAuthenticated"]
     )
       next({ name: "Login", query: { redirect: to.fullPath } });

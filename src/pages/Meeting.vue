@@ -1,6 +1,14 @@
 <template>
   <v-container fluid fill-height>
-    <JitsiMeet :roomName="$route.params.roomName" :jwt="jwt"> </JitsiMeet>
+    <JitsiMeet
+      :roomName="$route.params.roomName"
+      :userInfo="{
+        displayName: $store.getters['user/getName'],
+        email: $store.getters['user/getEmail'],
+        // avatar: $store.getters['user/getAvatar'],
+      }"
+    >
+    </JitsiMeet>
   </v-container>
 </template>
 

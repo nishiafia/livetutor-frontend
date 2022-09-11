@@ -86,7 +86,7 @@
                   name: 'meeting',
                   params: {
                     roomName: selectedEvent.lobby_name,
-                    jwt: meetingjwt,
+                    // jwt: meetingjwt,
                   },
                 }"
               >
