@@ -8,7 +8,7 @@
         :key="index"
         class="mx-1"
         color="third"
-        v-html="category.name"
+        v-html="category"
       ></v-chip>
       <v-spacer></v-spacer>
       <v-menu v-if="class_info.is_author">

@@ -241,15 +241,16 @@ export default {
       return this.$store.dispatch("assignments/delete", this.assignment.id);
     },
     addFiles() {
-      let formData = new FormData();
-      formData.append("id", this.assignment.id);
+      const formData = new FormData();
+      const assignment_id = this.assignment.id;
+      formData.append("assignment_id", assignment_id);
       if (this.newFiles.length > 0) {
         for (let i = 0; i < this.newFiles.length; i++) {
           formData.append("attachments[]", this.newFiles[i]);
         }
       }
       return api
-        .post("assignment_files/", formData, {
+        .post(`assignments/${assignment_id}/files/`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

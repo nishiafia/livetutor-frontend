@@ -82,10 +82,12 @@
 
               <v-btn
                 icon
+                target="_blank"
                 :to="{
                   name: 'meeting',
                   params: {
                     roomName: selectedEvent.lobby_name,
+
                     // jwt: meetingjwt,
                   },
                 }"
@@ -151,11 +153,6 @@ export default {
     this.$store.dispatch("meetings/get");
     this.class = this.$store.getters["classes/get_current_class_info"](
       this.class_id
-    );
-    console.log(
-      this.$store.getters["classes/is_class_owner_or_teacher"](
-        "53ddcf2512b04c01b9c78b4561a47c8e"
-      )
     );
   },
   computed: {

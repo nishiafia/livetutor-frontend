@@ -77,8 +77,6 @@ export default {
       ],
       navs: [
         { title: "Home", path: "/" },
-        //TODO: remove profile(duplicate)
-        { title: "Profile", path: "/profile" },
         { title: "Payment", path: "/payment" },
       ],
     };

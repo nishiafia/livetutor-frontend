@@ -12,7 +12,7 @@
           </v-btn>
         </template>
         <v-list>
-          <v-dialog
+          <!-- <v-dialog
             v-model="dialogShowTeacherBooking"
             width="600"
             min-height="600"
@@ -24,9 +24,9 @@
               </v-list-item>
             </template>
             <Bookings></Bookings>
-          </v-dialog>
+          </v-dialog> -->
 
-          <v-dialog v-model="dialogCreateListingProfile" width="800">
+          <!-- <v-dialog v-model="dialogCreateListingProfile" width="800">
             <template v-slot:activator="{ on, attrs }">
               <v-list-item text v-bind="attrs" v-on="on">
                 <v-icon class="px-2" color="accent">mdi-file-cog</v-icon> Manage
@@ -34,7 +34,7 @@
               </v-list-item>
             </template>
             <create-listing-profile></create-listing-profile>
-          </v-dialog>
+          </v-dialog> -->
 
           <v-list-item
             text

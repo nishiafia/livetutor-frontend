@@ -29,13 +29,17 @@ export default {
       }
 
       api
-        .post("exams/", formData, { headers: { "Content-Type": "multipart/form-data" } })
+        .post("exams/", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then(() => dispatch("get"));
     },
-    update({ dispatch }, { id, name, description, exam_date, start_time, end_time, mark }) {
+    update(
+      { dispatch },
+      { id, name, description, exam_date, start_time, end_time, mark }
+    ) {
       return api
-        .put("exams/", {
-          id,
+        .patch(`exams/${id}/`, {
           name,
           description,
           exam_date,
@@ -57,27 +61,28 @@ export default {
         formData.append("exam_submission_files[]", exam_submission_files[i]);
       }
       return api
-        .post(`exams/${exam_id}/submissions/`, formData, { headers: { "Content-Type": "multipart/form-data" } })
+        .post(`exams/${exam_id}/submissions/`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then((res) => console.log(res));
     },
     getComments({ commit, getters }, payload) {
-
-      return api.get(`exams/${payload.id}/comments/`).then(
-        (response) => {
+      return api
+        .get(`exams/${payload.id}/comments/`)
+        .then((response) => {
           commit("loadComments", { id: payload.id, comments: response.data });
-
-        }
-      ).catch((err) => console.log(err));
-
-    }
+        })
+        .catch((err) => console.log(err));
+    },
   },
   mutations: {
     load(state, payload) {
       state.exams = payload;
     },
     loadComments(state, payload) {
-      state.exams.find((exam) => exam.id === payload.id).comments = payload.comments;
-    }
+      state.exams.find((exam) => exam.id === payload.id).comments =
+        payload.comments;
+    },
   },
   getters: {
     all_exam: (state) => state.exams,

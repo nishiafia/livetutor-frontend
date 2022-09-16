@@ -21,10 +21,10 @@
       </v-dialog>
     </v-toolbar>
 
-    <v-row>
+    <v-row class="pa-2">
       <v-col v-for="cls in classes" v-bind:key="cls.id" cols="6" lg="3">
         <v-card
-          class="ma-2 pa-2"
+          class="pa-2"
           width="100%"
           elevation="3"
           outlined
@@ -73,9 +73,9 @@
             Category:
             <v-chip
               class="mx-1"
-              v-for="{ name, id } in cls.categories"
-              :key="id"
-              >{{ name }}</v-chip
+              v-for="(category, index) in cls.categories"
+              :key="index"
+              >{{ category }}</v-chip
             >
           </v-card-text>
         </v-card>

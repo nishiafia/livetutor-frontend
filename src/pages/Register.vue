@@ -105,7 +105,6 @@ export default {
             ? process.env.VUE_APP_BACKEND_BASEURL + "users/" //TODO: search possibility
             : "http://localhost:8000/api/users/";
 
-        console.log(register_url);
         return axios
           .post(register_url, data, {
             headers: {

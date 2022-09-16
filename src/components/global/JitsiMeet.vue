@@ -11,15 +11,18 @@ export default {
     },
     userInfo: {
       type: Object,
-      default: () => ({
-        displayName: "Anonymous",
-        email: "",
-      }),
+      default: () => {
+        return {
+          displayName: "Guest",
+          email: "",
+        };
+      },
     },
-    jwt: {
-      type: String,
-      default: "",
-    },
+
+    // jwt: {
+    //   type: String,
+    //   default: "",
+    // },
   },
   data() {
     return {
@@ -55,7 +58,10 @@ export default {
       const options = {
         // ...(this.jwt && { jwt: this.jwt }),
         roomName: this.roomName,
-        userInfo: this.userInfo,
+        userInfo: {
+          displayName: this.userInfo.displayName || "Meeting Me",
+          email: this.userInfo.email,
+        },
         parentNode: this.$refs.jitsiContainer,
         startWithAudioMuted: true,
         startWithVideoMuted: true,

@@ -103,23 +103,24 @@ export default {
 
   methods: {
     deleteFile({ id, note_id }) {
-      return api.delete(`note_files/${id}`);
+      return api.delete(`notes/${this.note_id}/${id}/`);
     },
     deleteNote() {
       return this.$store.dispatch("notes/delete", this.note.id);
     },
     addFiles() {
-      let formData = new FormData();
-      formData.append("id", this.note.id);
+      const note_id = this.note.id;
+      const formData = new FormData();
+
+      formData.append("note_id", note_id);
       if (this.newFiles.length > 0) {
         for (let i = 0; i < this.newFiles.length; i++) {
           formData.append("attachments[]", this.newFiles[i]);
         }
       }
 
-      console.log(formData);
       return api
-        .post("note_files/", formData, {
+        .post(`notes/${note_id}/files/`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

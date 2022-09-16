@@ -29,17 +29,22 @@ export default {
           formData.append("attachments[]", payload.attachments[i]);
         }
       }
-      return new Promise(
-        (resolve, reject) =>
-          api.post("/assignments/", formData, { headers: { "Content-Type": "multipart/form-data" } }).then((response) => {
-            dispatch("get")
-          }).then(resolve).catch(reject));
+      return new Promise((resolve, reject) =>
+        api
+          .post("/assignments/", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then((response) => {
+            dispatch("get");
+          })
+          .then(resolve)
+          .catch(reject)
+      );
     },
-
 
     update({ dispatch }, { id, name, description, due_date, due_time, mark }) {
       return api
-        .put("assignments/", {
+        .patch(`assignments/${id}/`, {
           id,
           name,
           description,
@@ -50,14 +55,16 @@ export default {
     },
     delete({ dispatch }, id) {
       return api.delete(`assignments/${id}`).then(() => dispatch("get"));
-
     },
     submit({ commit }, payload) {
-      const { assignment_id, assignment_submission_files } = payload
+      const { assignment_id, assignment_submission_files } = payload;
       let formData = new FormData();
-      formData.append('assignment_id', assignment_id)
+      formData.append("assignment_id", assignment_id);
       for (let i = 0; i < assignment_submission_files.length; i++) {
-        formData.append("assignment_submission_files[]", assignment_submission_files[i]);
+        formData.append(
+          "assignment_submission_files[]",
+          assignment_submission_files[i]
+        );
       }
       return api
         .post(`assignments/${assignment_id}/submissions/`, formData, {
@@ -66,15 +73,13 @@ export default {
         .then((res) => console.log(res));
     },
     getComments({ commit, getters }, payload) {
-
-      return api.get(`assignments/${payload.id}/comments/`).then(
-        (response) => {
+      return api
+        .get(`assignments/${payload.id}/comments/`)
+        .then((response) => {
           commit("loadComments", { id: payload.id, comments: response.data });
-
-        }
-      ).catch((err) => console.log(err));
-
-    }
+        })
+        .catch((err) => console.log(err));
+    },
   },
 
   mutations: {
@@ -82,8 +87,10 @@ export default {
       state.assignments = payload;
     },
     loadComments(state, payload) {
-      state.assignments.find((assignment) => assignment.id === payload.id).comments = payload.comments;
-    }
+      state.assignments.find(
+        (assignment) => assignment.id === payload.id
+      ).comments = payload.comments;
+    },
   },
 
   getters: {
@@ -91,8 +98,10 @@ export default {
     assignments_for_current_class: (state) => (class_id) =>
       state.assignments.filter((assignment) => assignment.room == class_id),
     get_submission_by_assignment: (state) => (assignment_id) =>
-      state.submissions.filter((submission) => submission.assignment_id === assignment_id),
-    getComments: (state) => (id) => state.assignments.find((assignment) => assignment.id === id).comments
-
+      state.submissions.filter(
+        (submission) => submission.assignment_id === assignment_id
+      ),
+    getComments: (state) => (id) =>
+      state.assignments.find((assignment) => assignment.id === id).comments,
   },
 };

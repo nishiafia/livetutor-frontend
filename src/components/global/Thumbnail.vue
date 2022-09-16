@@ -14,7 +14,7 @@
   />
   <v-img v-else max-width="100%" height="150" @click="openFile(file)">
     <v-row justify="center" align="center" class="fill-height">
-      <h1>{{ file.split(".").pop() }}</h1>
+      <v-card-title>{{ file.split(".").pop() }}</v-card-title>
     </v-row>
   </v-img>
 </template>

@@ -7,15 +7,13 @@
       <v-row>
         <v-col>
           <v-text-field v-model="class_info.name" label="Title"></v-text-field>
-          <v-autocomplete
+          <v-combobox
             v-model="class_info.categories"
             label="Category"
-            :items="categories"
-            item-text="name"
-            item-value="name"
+            :items="categories.map((item) => item.title)"
             multiple
             chips
-          ></v-autocomplete>
+          ></v-combobox>
         </v-col>
       </v-row>
     </v-card-text>

@@ -29,14 +29,15 @@ export default {
       }
 
       return api
-        .post("notes/", formData, { headers: { "Content-Type": "multipart/form-data" } })
+        .post("notes/", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then(() => dispatch("get"));
     },
 
     update({ dispatch }, { id, name, description }) {
       return api
-        .put("notes/", {
-          id,
+        .patch(`notes/${id}/`, {
           name,
           description,
         })
@@ -45,16 +46,14 @@ export default {
     delete({ dispatch }, id) {
       return api.delete(`notes/${id}/`).then(() => dispatch("get"));
     },
-    getComments({ commit, getters }, payload) {
-
-      return api.get(`notes/${payload.id}/comments/`).then(
-        (response) => {
+    getComments({ commit }, payload) {
+      return api
+        .get(`notes/${payload.id}/comments/`)
+        .then((response) => {
           commit("loadComments", { id: payload.id, comments: response.data });
-
-        }
-      ).catch((err) => console.log(err));
-
-    }
+        })
+        .catch((err) => console.log(err));
+    },
   },
 
   mutations: {
@@ -62,8 +61,9 @@ export default {
       state.notes = payload;
     },
     loadComments(state, payload) {
-      state.notes.find((note) => note.id === payload.id).comments = payload.comments;
-    }
+      state.notes.find((note) => note.id === payload.id).comments =
+        payload.comments;
+    },
   },
   getters: {
     all_note: (state) => state.notes,

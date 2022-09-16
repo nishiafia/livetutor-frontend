@@ -7,18 +7,22 @@ export default {
   },
   actions: {
     get({ commit }) {
-      return api.get("/rooms/").then((response) => commit("load", response.data));
+      return api
+        .get("/rooms/")
+        .then((response) => commit("load", response.data));
     },
     add({ dispatch }, { name, selected_categories }) {
       return api
         .post("/rooms/", {
           name,
-          selected_categories,
+          categories: selected_categories,
         })
         .then(() => dispatch("get"));
     },
     update({ dispatch }, { id, name, categories }) {
-      return api.put("/rooms/", { id, name, categories }).then(() => dispatch("get"));
+      return api
+        .patch(`/rooms/${id}/`, { name, categories })
+        .then(() => dispatch("get"));
     },
     delete({ dispatch }, { id }) {
       return api.delete(`/rooms/${id}`).then(() => dispatch("get"));
@@ -32,7 +36,8 @@ export default {
   getters: {
     get_current_class_info: (state) => (class_id) =>
       state.classes.find((cls) => cls.id == class_id),
-    get_user_owned_classes: (state) => state.classes.filter((cls) => cls.is_author === true),
+    get_user_owned_classes: (state) =>
+      state.classes.filter((cls) => cls.is_author === true),
     is_class_owner: (state) => (class_id) =>
       state.classes.find((cls) => cls.id == class_id).is_author,
     is_class_teacher: (state) => (class_id) =>
