@@ -63,6 +63,14 @@ function configRoutes() {
               "@/components/organization/create/UploadOrganizationUsersRooms.vue"
             ),
         },
+        {
+          path: "/update-organization-details",
+          name: "UpdateOrganizationUsers",
+          component: () =>
+            import(
+              "@/components/organization/update/UpdateOrganizationDetails.vue"
+            ),
+        },
       ],
     },
 

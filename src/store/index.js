@@ -7,6 +7,7 @@ import ClassStore from "./ClassStore";
 import ExamStore from "./ExamStore";
 import NoteStore from "./NoteStore";
 import PaymentStore from "./PaymentStore";
+import OrganizationStore from "./OrganizationStore";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -21,5 +22,6 @@ export const store = new Vuex.Store({
     notes: NoteStore,
     exams: ExamStore,
     payment: PaymentStore,
+    organization: OrganizationStore,
   },
 });

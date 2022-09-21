@@ -1,39 +1,54 @@
 <template>
-  <v-card class="pa-0">
-    <v-toolbar flat color="secondary" dark>
-      <v-toolbar-title>Assign Users to Rooms</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon @click="$emit('closeDialog')">
-        <v-icon large color="red lighten-2">mdi-close-circle-outline</v-icon>
-      </v-btn>
-    </v-toolbar>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" md="10" lg="8">
+        <v-card class="pa-4">
+          <v-card-actions>
+            <v-card-title>Assign Users to Rooms</v-card-title>
+            <v-spacer> </v-spacer
+            ><v-btn
+              tag="a"
+              color="secondary"
+              outlined
+              dark
+              href="/files/meetingme_org_user_template.csv"
+              download
+              >Download Template
+              <v-icon color="secondary" right> mdi-download </v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-divider class="mx-4 mb-6"></v-divider>
 
-    <v-file-input
-      class="ma-4"
-      v-model="user_room_csv"
-      label="Upload Users-Rooms CSV"
-      @change="loadCSV"
-    >
-      <template #append-outer>
-        <v-btn
-          icon
-          tag="a"
-          href="/files/meetingme_org_user_template.csv"
-          download
-        >
-          <v-icon color="secondary"> mdi-download </v-icon>
-        </v-btn>
-      </template>
-    </v-file-input>
-    <v-divider></v-divider>
-    <v-data-table class="ma-4" :headers="headers" :items="items"></v-data-table>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="primary" @click="assignRoomUsers">
-        Assign Users To Rooms
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+          <!-- <v-spacer></v-spacer> -->
+          <!-- <v-btn icon @click="$emit('closeDialog')">
+        <v-icon large color="red lighten-2">mdi-close-circle-outline</v-icon>
+      </v-btn> -->
+
+          <v-file-input
+            v-model="user_room_csv"
+            outlined
+            dense
+            label="Upload Users-Rooms CSV"
+            @change="loadCSV"
+          >
+          </v-file-input>
+
+          <v-divider></v-divider>
+          <v-data-table
+            class="ma-4"
+            :headers="headers"
+            :items="items"
+          ></v-data-table>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn class="pa-4" color="primary" @click="assignRoomUsers">
+              Assign Users To Rooms
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

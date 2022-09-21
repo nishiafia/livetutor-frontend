@@ -22,6 +22,12 @@
           </v-form>
           <v-form ref="form2" v-show="otp_verified">
             <v-text-field
+              v-model="username"
+              label="Username"
+              :rules="$requiredRules"
+            >
+            </v-text-field>
+            <v-text-field
               v-model="name"
               label="Full Name"
               :rules="$requiredRules"
@@ -77,6 +83,7 @@ export default {
       email: undefined,
       password: Math.random().toString().slice(2, 6),
       otp: "",
+      username: "",
       pass_generated: false,
       server_otp: "",
       otp_verified: false,
@@ -94,6 +101,7 @@ export default {
     register() {
       if (this.$refs.form2.validate()) {
         const data = {
+          username: this.username,
           name: this.name,
           phone: this.mobile,
           address: this.address,

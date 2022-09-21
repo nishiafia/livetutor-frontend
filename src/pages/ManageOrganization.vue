@@ -1,22 +1,15 @@
 <template>
   <v-container>
-    <v-navigation-drawer v-model="sidebar" app dark color="primary">
+    <v-navigation-drawer absolute dark color="primary">
       <v-list>
-        <v-list-group
-          v-for="item in menus"
-          :key="item.title"
-          no-action
-          color="white"
-        >
+        <v-list-group v-for="item in menus" :key="item.title" color="white">
           <template #prependIcon>
             <v-icon class="mx-0 px-0">
               {{ item.icon }}
             </v-icon>
           </template>
           <template #activator>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.name"></v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title v-text="item.name"></v-list-item-title>
           </template>
 
           <v-list-item
@@ -30,9 +23,7 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
-      <router-view></router-view>
-    </v-main>
+    <v-main> <router-view></router-view></v-main>
   </v-container>
 </template>
 
@@ -42,6 +33,17 @@ export default {
     return {
       sidebar: true,
       menus: [
+        {
+          name: "Organization",
+          icon: "mdi-account-group",
+          submenus: [
+            {
+              name: "Update Details",
+              icon: "mdi-account-edit",
+              to: "/update-organization-details",
+            },
+          ],
+        },
         {
           name: "Users",
           icon: "mdi-account-multiple",

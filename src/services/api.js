@@ -22,6 +22,6 @@ function setToken(token) {
 // }
 
 const api = Axios.create(config);
-api.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-api.defaults.xsrfCookieName = "csrftoken";
+// api.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+// api.defaults.xsrfCookieName = "csrftoken";
 export default api;

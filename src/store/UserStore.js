@@ -7,6 +7,7 @@ export default {
     refresh: localStorage.getItem("refresh") || null,
     username: "",
     name: "",
+    user_type: "",
     authenticated: false,
   },
   actions: {
@@ -26,7 +27,11 @@ export default {
       return new Promise((resolve, reject) =>
         api
           .post("/register/", { phone: phone, password: password })
-          .then(() => dispatch("login", { phone: phone, password: password }).then(() => resolve()))
+          .then(() =>
+            dispatch("login", { phone: phone, password: password }).then(() =>
+              resolve()
+            )
+          )
           .catch((err) => {
             reject(err.data);
           })
@@ -37,8 +42,17 @@ export default {
         .post("users/verify/", null, {
           headers: { Authorization: `Bearer ${state.access}` },
         })
-        .then((res) => commit("loadUser", { username: res.data.username, name: res.data.name }))
-        .then(() => (api.defaults.headers["Authorization"] = `Bearer ${state.access}`))
+        .then((res) =>
+          commit("loadUser", {
+            username: res.data.username,
+            name: res.data.name,
+            user_type: res.data.user_type,
+          })
+        )
+        .then(
+          () =>
+            (api.defaults.headers["Authorization"] = `Bearer ${state.access}`)
+        )
         .then(() => {
           dispatch("assignments/get", null, { root: true });
           dispatch("exams/get", null, { root: true });
@@ -61,10 +75,11 @@ export default {
       localStorage.setItem("access", access);
       localStorage.setItem("refresh", refresh);
     },
-    loadUser(state, { username, name }) {
+    loadUser(state, { username, name, user_type }) {
       state.username = username;
       state.authenticated = true;
       state.name = name;
+      state.user_type = user_type;
     },
     clear(state) {
       state.username = "";
@@ -84,5 +99,10 @@ export default {
     getUserId: (state) => state.id,
     getName: (state) => state.name,
     getEmail: (state) => state.email,
+    getUserType: (state) => state.user_type,
+    isOrganization: (state) => state.user_type === "ORGANIZATION",
+    getOrganizationID: (state) =>
+      state.user_type === "ORGANIZATION" ? state.id : null,
+    isRegular: (state) => state.user_type === "REGULAR",
   },
 };

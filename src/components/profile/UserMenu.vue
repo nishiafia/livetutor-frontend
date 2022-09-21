@@ -35,8 +35,19 @@
             </template>
             <create-listing-profile></create-listing-profile>
           </v-dialog> -->
-
           <v-list-item
+            v-if="$store.getters['user/isRegular']"
+            text
+            v-bind="attrs"
+            v-on="on"
+            link
+            to="/organization-users"
+          >
+            <v-icon class="px-2" color="accent">mdi-file-cog</v-icon> Update
+            User Information
+          </v-list-item>
+          <!-- <v-list-item
+            v-if="$store.getters['user/isOrganization']"
             text
             v-bind="attrs"
             v-on="on"
@@ -45,8 +56,9 @@
           >
             <v-icon class="px-2" color="accent">mdi-file-cog</v-icon> Manage
             Organization Users
-          </v-list-item>
+          </v-list-item> -->
           <v-list-item
+            v-if="$store.getters['user/isOrganization']"
             text
             v-bind="attrs"
             v-on="on"
