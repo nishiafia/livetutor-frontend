@@ -11,10 +11,14 @@ export default {
     authenticated: false,
   },
   actions: {
-    login({ commit, dispatch }, { phone, password }) {
+    login({ commit, dispatch }, { phone, password, country }) {
       return new Promise((resolve, reject) => {
         return api
-          .post("/token/", { phone: phone, password: password })
+          .post("/token/", {
+            phone: phone,
+            password: password,
+            country: country,
+          })
           .then((res) => {
             const { access, refresh } = res.data;
             commit("loadTokens", { access, refresh });
@@ -23,14 +27,20 @@ export default {
           .catch((err) => reject(err));
       });
     },
-    register({ commit, dispatch }, { phone, password }) {
+    register({ dispatch }, { phone, password, country }) {
       return new Promise((resolve, reject) =>
         api
-          .post("/register/", { phone: phone, password: password })
+          .post("/register/", {
+            phone: phone,
+            password: password,
+            country: country,
+          })
           .then(() =>
-            dispatch("login", { phone: phone, password: password }).then(() =>
-              resolve()
-            )
+            dispatch("login", {
+              phone: phone,
+              password: password,
+              country: country,
+            }).then(() => resolve())
           )
           .catch((err) => {
             reject(err.data);

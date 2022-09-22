@@ -9,7 +9,7 @@
             v-show="!otp_verified"
             v-model="valid_form1"
           >
-            <PhoneField ref="phoneField" v-model="mobile"></PhoneField>
+            <PhoneField ref="phoneField" v-model="countryPhone"></PhoneField>
             <v-alert type="info" class="d-flex align-items-center">
               Please save the below pin code for your login
             </v-alert>
@@ -89,6 +89,7 @@ export default {
       otp_verified: false,
       reg_complete: false,
       profile_completed: false,
+      countryPhone: {},
     };
   },
   methods: {
@@ -103,26 +104,28 @@ export default {
         const data = {
           username: this.username,
           name: this.name,
-          phone: this.mobile,
+          country: this.countryPhone.country,
+          phone: this.countryPhone.phone,
           address: this.address,
           password: this.password,
           email: this.email,
         };
-        const register_url =
-          process.env.NODE_ENV === "production"
-            ? process.env.VUE_APP_BACKEND_BASEURL + "users/" //TODO: search possibility
-            : "http://localhost:8000/api/users/";
+        // const register_url =
+        // process.env.NODE_ENV === "production"
+        //   ? process.env.VUE_APP_BACKEND_BASEURL + "users/" //TODO: search possibility
+        //   : "http://localhost:8000/api/users/";
 
-        return axios
-          .post(register_url, data, {
+        return this.$api
+          .post("users/", data, {
             headers: {
               "Content-Type": "application/json",
             },
           })
           .then(() =>
             this.$store.dispatch("user/login", {
-              phone: this.mobile,
+              phone: this.countryPhone.phone,
               password: this.password,
+              country: this.countryPhone.country,
             })
           )
           .then(() => this.$router.push("/profile"))

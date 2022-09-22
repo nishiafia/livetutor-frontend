@@ -8,7 +8,7 @@
             <v-card-subtitle class="text-muted"
               >Sign In to your account</v-card-subtitle
             >
-            <PhoneField v-model="mobile" ref="phoneField"></PhoneField>
+            <PhoneField v-model="countryPhone" ref="phoneField"></PhoneField>
             <!-- <vue-tel-input-vuetify
               v-model="mobile"
               :rules="$phoneRules"
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       form: "",
-      mobile: "",
+      countryPhone: "",
       password: "",
       showMessage: false,
       message: "",
@@ -85,7 +85,8 @@ export default {
       if (this.valid) {
         this.$store
           .dispatch("user/login", {
-            phone: this.mobile.replace("-", ""),
+            country: this.countryPhone.country,
+            phone: this.countryPhone.phone,
             password: this.password,
           })
           .then(() => this.$router.push("/profile"))

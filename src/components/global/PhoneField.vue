@@ -4,8 +4,8 @@
       <v-col cols="5" sm="3">
         <v-select
           :items="countries"
-          v-model="countryCode"
-          item-value="phone_code"
+          v-model="country"
+          item-value="id"
           :rules="requiredRules"
         >
           <template #item="{ item }">
@@ -42,7 +42,8 @@ export default {
   data() {
     return {
       phoneFieldForm: "",
-      countryCode: "+88",
+      country: "",
+      // countryCode: "+88",
       requiredRules: [(v) => !!v || "This Field is Required"],
       countries: [],
     };
@@ -62,12 +63,18 @@ export default {
   },
   methods: {
     loadCountries() {
-      this.$api.get("/locations/countries/").then((res) => {
-        this.countries = res.data;
-      });
+      return this.$api
+        .get("/locations/countries/")
+        .then((res) => {
+          this.countries = res.data;
+        })
+        .then(() => (this.country = this.countries[0].id));
     },
     handleInput(e) {
-      this.$emit("input", `${this.countryCode}${e}`);
+      this.$emit("input", {
+        country: this.country,
+        phone: e,
+      });
     },
     validate() {
       return this.$refs.phoneFieldForm.validate();
