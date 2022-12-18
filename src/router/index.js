@@ -71,6 +71,14 @@ function configRoutes() {
               "@/components/organization/update/UpdateOrganizationDetails.vue"
             ),
         },
+        {
+          path: "/send-sms-notification-to-users",
+          name: "SendSmsNotification",
+          component: () =>
+            import(
+              "@/components/organization/sms/SendSmsNotification.vue"
+            ),
+        },
       ],
     },
 

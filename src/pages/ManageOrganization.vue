@@ -65,6 +65,17 @@ export default {
             },
           ],
         },
+         {
+          name: "SMS",
+          icon: "mdi-cellphone-android",
+          submenus: [
+            {
+              name: "Send SMS",
+              icon: "mdi-cellphone-android",
+              to: "/send-sms-notification-to-users",
+            },
+          ],
+        },
       ],
     };
   },
